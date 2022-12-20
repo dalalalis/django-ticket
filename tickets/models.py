@@ -5,7 +5,7 @@ from django.db import models
 from django.contrib.auth.models import User
  
 class Event(models.Model):
-    title = models.TextField()
+    title = models.CharField(max_length=250)
     city = models.CharField(max_length=50)
     country = models.CharField(max_length=50)
     image = models.ImageField()
@@ -13,10 +13,8 @@ class Event(models.Model):
     startDate = models.DateTimeField()
     endDate = models.DateTimeField()
    
- 
-
-def __str__(self):
-        return f'{self.title, self.city, self.country, self.venue, self.startDate, self.endDate, self.image}'
+    def __str__(self):
+        return f'{self.title}'
    
  
 class Ticket(models.Model):
@@ -30,7 +28,7 @@ class Ticket(models.Model):
 
 
     def __str__(self):
-        return f'{self.ticketdetails, self.owner, self.price}'
+        return f'{self.ticketdetails, self.event,self.owner, self.price}'
 
 
 
@@ -40,7 +38,7 @@ class Orders(models.Model):
     seller = models.ForeignKey(User, on_delete=models.CASCADE, related_name="seller")
     buyer = models.ForeignKey(User, on_delete=models.CASCADE, related_name="buyer")
     ticket = models.ForeignKey(Ticket, on_delete=models.CASCADE, related_name="order")
-    date_created = models.DateTimeField()
-    date_modified =models.DateTimeField()
+    date_created = models.DateTimeField(auto_now_add=True)
+    date_modified =models.DateTimeField(auto_now_add=True)
     def __str__(self):
-        return (self.order, self.ticket)
+        return f'{self.seller,self.buyer ,self.ticket, self.date_created, self.date_modified }'

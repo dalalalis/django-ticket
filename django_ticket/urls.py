@@ -19,10 +19,22 @@ from django.urls import path, include
 from authentications.views import RegistrationAPIView, LoginAPIView
 from django.conf import settings
 from django.conf.urls.static import static 
+from tickets.views import EventListView, EventCreateView, EventDeleteView, EventUpdateView
 
 urlpatterns = [
     path('admin/', admin.site.urls),
 
+
+    # ----- Authentications URLs -----
     path("register/", RegistrationAPIView.as_view(), name="register"),
     path("login/", LoginAPIView.as_view(), name="login"),
+
+    # ----- Event URLs -----
+    path('event/', EventListView.as_view() , name="event-list"),
+    path('events/add/', EventCreateView.as_view() , name="event-add"),
+    path('events/<int:event_id>/edit/', EventUpdateView.as_view() , name="events-edit"),
+    path('events/<int:event_id>/delete/', EventDeleteView.as_view() , name="events-delete"),
 ]
+ 
+    
+    
