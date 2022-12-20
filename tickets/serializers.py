@@ -46,3 +46,26 @@ class DeleteTicketSerializer(serializers.ModelSerializer):
     class Meta:
         model = Ticket
         fields = ['owner', 'ticketdetails', 'event','price','available','image'] 
+
+# ............Orders...........
+
+class OrdersListSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Orders
+        fields = ['seller', 'buyer', 'ticket','date_created','date_modified']
+
+class CraeteOrderSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Orders
+        fields = ['seller', 'buyer', 'ticket','date_created','date_modified']
+
+# class UpdateOrderSerializer(serializers.ModelSerializer):
+#     class Meta:
+#         model = Orders
+#         fields = ['seller', 'buyer', 'ticket','date_created','date_modified']        
+
+# class DeleteOrderSerializer(serializers.ModelSerializer):
+#     class Meta:
+#         model = Orders
+#         fields = ['seller', 'buyer', 'ticket','date_created','date_modified']         
+

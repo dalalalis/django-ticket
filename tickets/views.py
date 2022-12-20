@@ -5,6 +5,7 @@ from django.shortcuts import render
 from rest_framework.generics import ListAPIView, UpdateAPIView, CreateAPIView, DestroyAPIView
 from tickets.serializers import EventsListSerializer,CreateEventSerializer,UpdateEventSerializer,DeleteEventSerializer
 from tickets.serializers import TicketListSerializer , CraeteTicketSerializer , UpdateTicketSerializer , DeleteTicketSerializer
+from tickets.serializers import OrdersListSerializer , CraeteOrderSerializer 
 from rest_framework.permissions import IsAuthenticated, AllowAny, IsAdminUser
 
 from tickets.models import Event,Ticket,Orders
@@ -68,4 +69,18 @@ class TicketDeleteView(DestroyAPIView):
     lookup_field = 'id'
     lookup_url_kwarg = 'ticket_id'
     permission_classes=[IsAuthenticated,IsAdminUser]
+
+# ------------- Order VIEWS -------------
+
+class OrderListView(ListAPIView):
+    queryset = Orders.objects.all()
+    serializer_class = OrdersListSerializer
+    permission_classes=[AllowAny]
+
+class OrdertCreateView(CreateAPIView):
+    serializer_class = CraeteOrderSerializer
+    def perform_create(self, serializer):
+        serializer.save()
+    permission_classes=[IsAuthenticated]
+
 

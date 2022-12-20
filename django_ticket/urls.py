@@ -19,7 +19,7 @@ from django.urls import path, include
 from authentications.views import RegistrationAPIView, LoginAPIView
 from django.conf import settings
 from django.conf.urls.static import static 
-from tickets.views import EventListView, EventCreateView, EventDeleteView, EventUpdateView,TicketListView,TicketCreateView,TicketUpdateView,TicketDeleteView
+from tickets.views import EventListView, EventCreateView, EventDeleteView, EventUpdateView,TicketListView,TicketCreateView,TicketUpdateView,TicketDeleteView,OrderListView,OrdertCreateView
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -41,6 +41,9 @@ urlpatterns = [
     path('tickets/<int:ticket_id>/edit/', TicketUpdateView.as_view() , name="ticket-edit"),
     path('tickets/<int:ticket_id>/delete/', TicketDeleteView.as_view() , name="ticket-delete"),
     
+   # ----- Order URLs -----
+    path('Orders/', OrderListView .as_view() , name="Orders-list"),
+    path('Orders/add/', OrdertCreateView.as_view() , name="Orders-add"), 
 ]
 if settings.DEBUG:
     urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
