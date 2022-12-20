@@ -25,3 +25,24 @@ class DeleteEventSerializer(serializers.ModelSerializer):
         model = Event
         fields = ['title', 'city', 'country','image','venue','startDate','startDate','endDate']        
 
+# ............Tickets...........
+
+class TicketListSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Ticket
+        fields = ['owner', 'ticketdetails', 'event','price','available','image']
+
+class CraeteTicketSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Ticket
+        fields = ['owner', 'ticketdetails', 'event','price','available','image']
+
+class UpdateTicketSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Ticket
+        fields = ['owner', 'ticketdetails', 'event','price','available','image']        
+
+class DeleteTicketSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Ticket
+        fields = ['owner', 'ticketdetails', 'event','price','available','image'] 

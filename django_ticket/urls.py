@@ -19,7 +19,7 @@ from django.urls import path, include
 from authentications.views import RegistrationAPIView, LoginAPIView
 from django.conf import settings
 from django.conf.urls.static import static 
-from tickets.views import EventListView, EventCreateView, EventDeleteView, EventUpdateView
+from tickets.views import EventListView, EventCreateView, EventDeleteView, EventUpdateView,TicketListView,TicketCreateView,TicketUpdateView,TicketDeleteView
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -30,11 +30,20 @@ urlpatterns = [
     path("login/", LoginAPIView.as_view(), name="login"),
 
     # ----- Event URLs -----
-    path('event/', EventListView.as_view() , name="event-list"),
+    path('events/', EventListView.as_view() , name="events-list"),
     path('events/add/', EventCreateView.as_view() , name="event-add"),
     path('events/<int:event_id>/edit/', EventUpdateView.as_view() , name="events-edit"),
     path('events/<int:event_id>/delete/', EventDeleteView.as_view() , name="events-delete"),
+
+        # ----- Ticket URLs -----
+    path('tickets/', TicketListView.as_view() , name="tickets-list"),
+    path('tickets/add/', TicketCreateView.as_view() , name="ticket-add"),
+    path('tickets/<int:ticket_id>/edit/', TicketUpdateView.as_view() , name="ticket-edit"),
+    path('tickets/<int:ticket_id>/delete/', TicketDeleteView.as_view() , name="ticket-delete"),
+    
 ]
- 
+if settings.DEBUG:
+    urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
     
     
