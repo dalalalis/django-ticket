@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'tickets',
     'rest_framework',
     'authentications',
+    'Webpage'
 ]
 
 

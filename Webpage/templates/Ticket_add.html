@@ -1,0 +1,42 @@
+{% extends "base.html" %} {% block content%}
+
+<div class="makeRow">
+  {% for ticket in tickets %}
+
+  <!-- <h4 class="m-2"><strong>Ticket_owner: {{ticket.owner}}</strong></h4> -->
+  <!-- <h4>Image: {{ticket.image}}</h4> -->
+
+  <!-- <img src="ticket.media.url" alt="" style="width: 80px; height: 80px" /> -->
+
+  <!-- <h4>Ticket_details: {{ticket.ticketdetails}}</h4> -->
+  <!-- <h4>Event_name: {{ticket.event}}</h4> -->
+
+  <!-- <h4>Ticket_price: {{ticket.price}}</h4> -->
+  <!-- <h4>Ticket_availability: {{ticket.available}}</h4> -->
+
+  <div id="container">
+    <!-- A div with card class for the card  -->
+    <div class="card">
+      <img class="imaag" src="{{ticket.image.url}}" alt="Image not found" />
+      {{ticket.image}}
+      <!-- A div with card__details class to hold the details in the card  -->
+      <div class="card__details">
+        <!-- Span with tag class for the tag -->
+        <span class="tag">{{ticket.event}}</span>
+
+        <span class="tag">{{ticket.available}}</span>
+
+        <!-- A div with name class for the name of the card -->
+        <div class="name">Ticket_owner: {{ticket.owner}}</div>
+
+        <p>{{ticket.ticketdetails}}</p>
+        <p>Price: {{ticket.price}}</p>
+
+        <button>More info</button>
+      </div>
+    </div>
+  </div>
+
+  {% endfor %}
+</div>
+{% endblock %}

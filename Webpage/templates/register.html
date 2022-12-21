@@ -1,0 +1,13 @@
+
+{% extends "base.html" %}
+{% block content%}
+   <h1>Register</h1> 
+   <form action={% url 'sign_up' %} method="POST">
+        <h4>Create a new account</h4>
+        {% csrf_token %}
+        {{ form }}
+        <button class="btn btn-primary">Create account</button>
+        <hr size="2" noshade="noshade">
+        <a class="btn btn-outline-dark " href={% url 'log_in' %}>Have an account login</a>
+    </form>
+    {% endblock %}

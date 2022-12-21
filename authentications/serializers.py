@@ -15,7 +15,9 @@ class RegistrationSerializer(serializers.ModelSerializer):
         def create(self, validated_data):
             username = validated_data ["username"]
             password = validated_data ["password"]
+            print("under password")
             new_user = User(username = username)
+            print("under new_user")
             new_user.set_password(password)
             new_user.save()
 
