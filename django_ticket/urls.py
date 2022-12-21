@@ -16,8 +16,13 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 
+
+
+from authentications.views import UserCreateAPIView, UserLoginAPIView
+
 from authentications.views import RegistrationAPIView, LoginAPIView
 from tickets.views import EventListView, EventCreateView, EventDeleteView, EventUpdateView,TicketListView,TicketCreateView,TicketUpdateView,TicketDeleteView,OrderListView,OrdertCreateView
+
 from django.conf import settings
 from django.conf.urls.static import static 
 
@@ -26,8 +31,8 @@ urlpatterns = [
 
 
     # ----- Authentications URLs -----
-    path("register/", RegistrationAPIView.as_view(), name="register"),
-    path("login/", LoginAPIView.as_view(), name="login"),
+    path("register/", UserCreateAPIView.as_view(), name="register"),
+    path("login/", UserLoginAPIView.as_view(), name="login"),
 
     # ----- Event URLs -----
     path('events/', EventListView.as_view() , name="events-list"),
@@ -48,4 +53,5 @@ urlpatterns = [
 if settings.DEBUG:
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
     
-    
+if settings.DEBUG:
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
