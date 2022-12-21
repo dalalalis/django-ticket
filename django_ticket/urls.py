@@ -17,9 +17,9 @@ from django.contrib import admin
 from django.urls import path, include
 
 from authentications.views import RegistrationAPIView, LoginAPIView
+from tickets.views import EventListView, EventCreateView, EventDeleteView, EventUpdateView,TicketListView,TicketCreateView,TicketUpdateView,TicketDeleteView,OrderListView,OrdertCreateView
 from django.conf import settings
 from django.conf.urls.static import static 
-from tickets.views import EventListView, EventCreateView, EventDeleteView, EventUpdateView,TicketListView,TicketCreateView,TicketUpdateView,TicketDeleteView,OrderListView,OrdertCreateView
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -46,7 +46,6 @@ urlpatterns = [
     path('Orders/add/', OrdertCreateView.as_view() , name="Orders-add"), 
 ]
 if settings.DEBUG:
-    urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
     
     
