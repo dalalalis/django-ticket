@@ -12,18 +12,18 @@ class RegistrationSerializer(serializers.ModelSerializer):
         model = User
         fields = ["username", "password", "token"]
 
-        def create(self, validated_data):
-            username = validated_data ["username"]
-            password = validated_data ["password"]
-            new_user = User(username = username)
-            new_user.set_password(password)
-            new_user.save()
+    def create(self, validated_data):
+        username = validated_data ["username"]
+        password = validated_data ["password"]
+        new_user = User(username = username)
+        new_user.set_password(password)
+        new_user.save()
 
-            payload = RefreshToken.for_user(new_user)
-            token = str(payload.access_token)
+        payload = RefreshToken.for_user(new_user)
+        token = str(payload.access_token)
 
-            validated_data["token"] = token
-            return validated_data
+        validated_data["token"] = token
+        return validated_data
 
 
 class LoginSerializer(serializers.Serializer):
