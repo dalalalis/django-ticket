@@ -8,7 +8,9 @@ class Event(models.Model):
     title = models.CharField(max_length=250)
     city = models.CharField(max_length=50)
     country = models.CharField(max_length=50)
+
     image = models.ImageField(help_text='Product Image', upload_to='events', blank=True)
+
     venue = models.CharField(max_length=50)
     startDate = models.DateTimeField()
     endDate = models.DateTimeField()
