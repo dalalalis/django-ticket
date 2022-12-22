@@ -33,10 +33,13 @@ class Ticket(models.Model):
 
 
 class Orders(models.Model):
-    seller = models.ForeignKey(User, on_delete=models.CASCADE, related_name="seller")
     buyer = models.ForeignKey(User, on_delete=models.CASCADE, related_name="buyer")
     ticket = models.ForeignKey(Ticket, on_delete=models.CASCADE, related_name="order")
     date_created = models.DateTimeField(auto_now_add=True)
     date_modified =models.DateTimeField(auto_now_add=True)
     def __str__(self):
         return f'{self.seller,self.buyer ,self.ticket, self.date_created, self.date_modified }'
+
+class Profile(models.Model):
+    user_name =models.OneToOneField(User,on_delete=models.CASCADE,primary_key=True)
+    civilid = models.PositiveIntegerField()    
