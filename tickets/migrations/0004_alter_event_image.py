@@ -18,9 +18,6 @@ class Migration(migrations.Migration):
             model_name='event',
             name='image',
 
-            field=models.ImageField(blank=True, help_text='Product Image', upload_to='images'),
-
-            field=models.ImageField(blank=True, upload_to=''),
-
+            field=models.ImageField(blank=True, help_text='Product Image', upload_to='images'),    
         ),
     ]

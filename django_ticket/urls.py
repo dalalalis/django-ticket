@@ -20,7 +20,7 @@ from django.urls import path, include
 
 from authentications.views import UserCreateAPIView, UserLoginAPIView
 
-from authentications.views import RegistrationAPIView, LoginAPIView
+from authentications.views import UserCreateAPIView, UserLoginAPIView
 from tickets.views import EventListView, EventCreateView, EventDeleteView, EventUpdateView,TicketListView,TicketCreateView,TicketUpdateView,TicketDeleteView,OrderListView,OrdertCreateView
 
 from django.conf import settings
