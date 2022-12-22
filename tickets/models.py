@@ -6,13 +6,13 @@ class Event(models.Model):
     title = models.CharField(max_length=250)
     city = models.CharField(max_length=50)
     country = models.CharField(max_length=50)
-    image = models.ImageField(blank=True)
+    image = models.ImageField(help_text='Product Image', upload_to='events', blank=True)  
     venue = models.CharField(max_length=50)
     startDate = models.DateTimeField()
     endDate = models.DateTimeField()
    
     def __str__(self):
-        return f'{self.title}'
+        return f'{self.startDate}'
    
  
 class Ticket(models.Model):
@@ -21,7 +21,7 @@ class Ticket(models.Model):
     event = models.ForeignKey(Event, on_delete=models.CASCADE, related_name="ticket_event")
     price = models.FloatField()
     available = models.BooleanField()
-    image = models.ImageField(help_text='Product Image', upload_to='images', blank=True),
+    image = models.ImageField(help_text='Product Image', upload_to='tickets', blank=True)  
 
 
 

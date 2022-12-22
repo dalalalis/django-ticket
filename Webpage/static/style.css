@@ -105,7 +105,6 @@ button {
 
   /* Button is inline-block element by default, it need to have block display for margin: 0 auto; to work */
   margin: 0 auto;
-  display: block;
 
   /* Button is a clickable element, therefore it should have a pointer cursor */
   cursor: pointer;

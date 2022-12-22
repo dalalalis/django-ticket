@@ -1,9 +1,7 @@
 {% extends "base.html" %} {% block content%}
 <h1>Home_page</h1>
 <p>Want to sell your ticket? Add it here!</p>
-<p>Or want to view available</p>
 <a href={% url 'create_ticket' %}><button>Add</button></a>
-<br>
-<p></p>
-<a href=''><button>View</button></a>
+<p>Or want to view available tickets?</p>
+<a href={% url 'tickts_page' %}><button>View Tickets</button></a>
 {% endblock %}

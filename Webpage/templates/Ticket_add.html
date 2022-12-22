@@ -18,14 +18,18 @@
     <!-- A div with card class for the card  -->
     <div class="card">
       <img class="imaag" src="{{ticket.image.url}}" alt="Image not found" />
-      {{ticket.image}}
       <!-- A div with card__details class to hold the details in the card  -->
       <div class="card__details">
         <!-- Span with tag class for the tag -->
-        <span class="tag">{{ticket.event}}</span>
+        <span class="tag">{{ticket.event.title}}</span>
 
-        <span class="tag">{{ticket.available}}</span>
+        {% if ticket.available %}
+        <span class="tag" style="color: green">Available</span>
 
+        {% else %}
+        <span class="tag" style="color: red">Not available</span>
+
+        {% endif %}
         <!-- A div with name class for the name of the card -->
         <div class="name">Ticket_owner: {{ticket.owner}}</div>
 

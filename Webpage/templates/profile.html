@@ -2,4 +2,11 @@
 <h2>Profile page</h2>
 
 <h4>Hello, {{user.username}}</h4>
-{% endblock %}
+
+{% for ticket in tickets %} {{ticket.event.title}}
+
+<a href="{% url 'delete-ticket-item' ticket_id=ticket.id %}"
+  ><button>Delete Ticket</button></a
+>
+
+{% endfor %} {%endblock %}

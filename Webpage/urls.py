@@ -12,6 +12,9 @@ urlpatterns = [
     path('dashboard/',views.create_ticket, name="create_ticket"),
     path('profile/',views.prfile_page, name="profile_page"),
     path('tickts/views',views.ticket_view, name="ticket_view_page"),
+    path("ticket/<int:ticket_id>/delete", views.ticket_item, name="delete-ticket-item"),
+    
+    
 ]
 
 if settings.DEBUG:
