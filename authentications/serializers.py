@@ -28,6 +28,18 @@ class UserCreateSerializer(serializers.ModelSerializer):
         fields = ["username", "password", "first_name", "last_name",'access']
 
     def create(self, validated_data):
+<<<<<<< HEAD
+        username = validated_data ["username"]
+        password = validated_data ["password"]
+        new_user = User(username = username)
+        new_user.set_password(password)
+        new_user.save()
+
+        payload = RefreshToken.for_user(new_user)
+        token = str(payload.access_token)
+
+        validated_data["token"] = token
+=======
         username = validated_data["username"]
         password = validated_data["password"]
         first_name = validated_data["first_name"]
@@ -36,6 +48,7 @@ class UserCreateSerializer(serializers.ModelSerializer):
         new_user.set_password(password)
         new_user.save()
         validated_data['access'] = MyTokenObtainPairSerializer.get_token(new_user)
+>>>>>>> caa886d430b89755460d6a270085b5d0982f0f83
         return validated_data
 
 
