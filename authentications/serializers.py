@@ -1,18 +1,34 @@
-from django.contrib.auth import get_user_model
+from django.contrib.auth.models import User
 from rest_framework import serializers
-from rest_framework_simplejwt.tokens import RefreshToken 
+from rest_framework_simplejwt.tokens import RefreshToken
+from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
 
-User = get_user_model()
 
-class RegistrationSerializer(serializers.ModelSerializer):
+
+class MyTokenObtainPairSerializer(TokenObtainPairSerializer):
+    @classmethod
+    def get_token(cls, user):
+        token = super().get_token(user)
+
+        # Add custom claims
+        token['username'] = user.username
+        # ...
+
+        return token
+
+
+
+
+class UserCreateSerializer(serializers.ModelSerializer):
     password = serializers.CharField(write_only=True)
-    token = serializers.CharField(allow_blank=True, read_only=True)
- 
+    access = serializers.CharField(allow_blank=True, read_only=True)
+
     class Meta:
         model = User
-        fields = ["username", "password", "token"]
+        fields = ["username", "password", "first_name", "last_name",'access']
 
     def create(self, validated_data):
+<<<<<<< HEAD
         username = validated_data ["username"]
         password = validated_data ["password"]
         new_user = User(username = username)
@@ -23,32 +39,38 @@ class RegistrationSerializer(serializers.ModelSerializer):
         token = str(payload.access_token)
 
         validated_data["token"] = token
+=======
+        username = validated_data["username"]
+        password = validated_data["password"]
+        first_name = validated_data["first_name"]
+        last_name = validated_data["last_name"]
+        new_user = User(username=username, first_name=first_name,last_name=last_name)
+        new_user.set_password(password)
+        new_user.save()
+        validated_data['access'] = MyTokenObtainPairSerializer.get_token(new_user)
+>>>>>>> caa886d430b89755460d6a270085b5d0982f0f83
         return validated_data
 
 
-class LoginSerializer(serializers.Serializer):
+
+class UserLoginSerializer(serializers.Serializer):
     username = serializers.CharField()
     password = serializers.CharField(write_only=True)
-    token = serializers.CharField(allow_blank=True, read_only=True)
-    
+    access = serializers.CharField(allow_blank=True, read_only=True)
     def validate(self, data):
         my_username = data.get("username")
-        my_password = data.get("password")      
-        
+        my_password = data.get("password")
+
         try:
-            user_obj = User.objects.get(username=my_username)
+            user = User.objects.get(username=my_username)
         except User.DoesNotExist:
-            raise serializers.ValidationError("username does not exist")
-       
-        if not user_obj.check_password(my_password):
-            raise serializers.ValidationError("Incorrect password")
+            raise serializers.ValidationError("This username does not exist")
 
-        payload = RefreshToken.for_user(user_obj)
+        if not user.check_password(my_password):
+            raise serializers.ValidationError("Incorrect username/password combination!")
+
+        payload = MyTokenObtainPairSerializer.get_token(user)
         token = str(payload.access_token)
-        
-        data["token"] = token
-        return data 
 
-    
-    
-    
+        data["access"] = token
+        return data

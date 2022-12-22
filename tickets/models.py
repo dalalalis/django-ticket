@@ -8,7 +8,9 @@ class Event(models.Model):
     title = models.CharField(max_length=250)
     city = models.CharField(max_length=50)
     country = models.CharField(max_length=50)
-    image = models.ImageField()
+
+    image = models.ImageField(help_text='Product Image', upload_to='events', blank=True)
+
     venue = models.CharField(max_length=50)
     startDate = models.DateTimeField()
     endDate = models.DateTimeField()
@@ -35,6 +37,7 @@ class Ticket(models.Model):
 
 
 class Orders(models.Model):
+
     seller = models.ForeignKey(User, on_delete=models.CASCADE, related_name="seller")
     buyer = models.ForeignKey(User, on_delete=models.CASCADE, related_name="buyer")
     ticket = models.ForeignKey(Ticket, on_delete=models.CASCADE, related_name="order")
