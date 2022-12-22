@@ -30,34 +30,34 @@ class DeleteEventSerializer(serializers.ModelSerializer):
 class TicketListSerializer(serializers.ModelSerializer):
     class Meta:
         model = Ticket
-        fields = ['owner', 'ticketdetails', 'event','price','available','image']
+        fields = ['owner', 'ticketdetails', 'event','price','available','image','delivery']
 
 class CraeteTicketSerializer(serializers.ModelSerializer):
     class Meta:
         model = Ticket
-        fields = ['owner', 'ticketdetails', 'event','price','available','image']
+        fields = ['owner', 'ticketdetails', 'event','price','available','image''delivery']
 
 class UpdateTicketSerializer(serializers.ModelSerializer):
     class Meta:
         model = Ticket
-        fields = ['owner', 'ticketdetails', 'event','price','available','image']        
+        fields = ['owner', 'ticketdetails', 'event','price','available','image','delivery']        
 
 class DeleteTicketSerializer(serializers.ModelSerializer):
     class Meta:
         model = Ticket
-        fields = ['owner', 'ticketdetails', 'event','price','available','image'] 
+        fields = ['owner', 'ticketdetails', 'event','price','available','image','delivery'] 
 
 # ............Orders...........
 
 class OrdersListSerializer(serializers.ModelSerializer):
     class Meta:
         model = Orders
-        fields = ['seller', 'buyer', 'ticket','date_created','date_modified']
+        fields = ['buyer', 'ticket','date_created','date_modified']
 
 class CraeteOrderSerializer(serializers.ModelSerializer):
     class Meta:
         model = Orders
-        fields = ['seller', 'buyer', 'ticket','date_created','date_modified']
+        fields = ['buyer', 'ticket','date_created','date_modified']
 
 # class UpdateOrderSerializer(serializers.ModelSerializer):
 #     class Meta:
