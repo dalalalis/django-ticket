@@ -1,5 +1,5 @@
 from django.shortcuts import render
-
+from datetime import datetime
 
 # Create your views here.
 from rest_framework.generics import ListAPIView, UpdateAPIView, CreateAPIView, DestroyAPIView
@@ -46,15 +46,22 @@ class EventDeleteView(DestroyAPIView):
 # ------------- Ticket VIEWS -------------
 
 class TicketListView(ListAPIView):
-    queryset = Ticket.objects.all()
     serializer_class = TicketListSerializer
     permission_classes=[AllowAny]
 
+    def get_queryset(self):
+        param_event_id=self.request.GET.get('event_id', None)
+        if param_event_id:
+            return Ticket.objects.filter(available=True, event__id=int(param_event_id), event__startDate__gt=datetime.now())
+        return Ticket.objects.filter(event__startDate__gt=datetime.now())
+
+
 class TicketCreateView(CreateAPIView):
     serializer_class = CraeteTicketSerializer
+    permission_classes=[IsAuthenticated,IsAdminUser]
+
     def perform_create(self, serializer):
         serializer.save()
-    permission_classes=[IsAuthenticated,IsAdminUser]
 
 class TicketUpdateView(UpdateAPIView):
     queryset = Ticket.objects.all()

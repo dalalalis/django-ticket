@@ -1,7 +1,5 @@
 from django.db import models
-from django.db import models
 from django.contrib.auth.models import User
-from django.db import IntegrityError
 
  
 class Event(models.Model):
@@ -14,7 +12,7 @@ class Event(models.Model):
     endDate = models.DateTimeField()
    
     def __str__(self):
-        return f'{self.startDate}'
+        return f'{self.title}'
    
  
 class Ticket(models.Model):

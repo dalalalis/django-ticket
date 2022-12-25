@@ -36,6 +36,7 @@ urlpatterns = [
     path('events/<int:event_id>/delete/', EventDeleteView.as_view() , name="events-delete"),
 
         # ----- Ticket URLs -----
+    path('tickets/<int:event_id>/', TicketListView.as_view() , name="tickets-list"),
     path('tickets/', TicketListView.as_view() , name="tickets-list"),
     path('tickets/add/', TicketCreateView.as_view() , name="ticket-add"),
     path('tickets/<int:ticket_id>/edit/', TicketUpdateView.as_view() , name="ticket-edit"),
