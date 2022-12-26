@@ -83,6 +83,13 @@ class OrderListView(ListAPIView):
     queryset = Orders.objects.all()
     serializer_class = OrdersListSerializer
     permission_classes=[AllowAny]
+    def get_orderqueryset(self):
+        param_ticket_id=self.request.GET.get('ticket_id', None)
+        if param_ticket_id:
+            return Orders.objects.filter( ticket__startDate__gt=datetime.now())
+        return Orders.objects.filter(ticket__startDate__gt=datetime.now())
+
+
 
 class OrdertCreateView(CreateAPIView):
     serializer_class = CraeteOrderSerializer

@@ -4,7 +4,7 @@ from tickets.models import Event, Ticket, Orders
 class EventsListSerializer(serializers.ModelSerializer):
     class Meta:
         model = Event
-        fields = ['event_id','title', 'city', 'country','image','venue','startDate','startDate','endDate']
+        fields = ['id','title', 'city', 'country','image','venue','startDate','startDate','endDate']
 
 
 class CreateEventSerializer(serializers.ModelSerializer):
