@@ -23,11 +23,11 @@ class Ticket(models.Model):
     available = models.BooleanField()
     image = models.ImageField(help_text='Product Image', upload_to='tickets', blank=True) 
     class Delivery_Method(models.TextChoices):
-        physical = "Physical"
+        physical = "physical"
         immediate = "immediate"
-        twentyfourhours = "Twenty_Four_Hours"
-        threedays = "Three_Days"
-        oneweek = "One_Week"
+        twentyfourhours = "twenty_Four_Hours"
+        threedays = "three_Days"
+        oneweek = "one_Week"
     delivery = models.CharField(max_length=100, choices=Delivery_Method.choices,default = "immediate")
 
     def __str__(self):

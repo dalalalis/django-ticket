@@ -4,7 +4,7 @@ from tickets.models import Event, Ticket, Orders
 class EventsListSerializer(serializers.ModelSerializer):
     class Meta:
         model = Event
-        fields = ['event_id','title', 'city', 'country','image','venue','startDate','startDate','endDate']
+        fields = ['id','title', 'city', 'country','image','venue','startDate','startDate','endDate']
 
 
 class CreateEventSerializer(serializers.ModelSerializer):
@@ -28,6 +28,9 @@ class DeleteEventSerializer(serializers.ModelSerializer):
 # ............Tickets...........
 
 class TicketListSerializer(serializers.ModelSerializer):
+
+    owner = serializers.CharField(source="owner.username", read_only=True)
+    event = serializers.CharField(source='event.title', read_only=True)
     class Meta:
         model = Ticket
         fields = ['owner', 'ticketdetails', 'event','price','available','image','delivery']
