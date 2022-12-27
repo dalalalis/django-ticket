@@ -46,7 +46,10 @@ urlpatterns = [
     path('Orders/', OrderListView .as_view() , name="Orders-list"),
     path('Orders/add/', OrdertCreateView.as_view() , name="Orders-add"), 
     
-    path('', include('Webpage.urls')),
+    path('', include('webauthentication.urls')),
+    path('', include('ticketweb.urls')),
+
+
 ]
 if settings.DEBUG:
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
