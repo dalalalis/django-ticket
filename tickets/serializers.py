@@ -28,8 +28,7 @@ class DeleteEventSerializer(serializers.ModelSerializer):
 # ............Tickets...........
 
 class TicketListSerializer(serializers.ModelSerializer):
-
-    owner = serializers.CharField(source="owner.username", read_only=True)
+    owner = serializers.CharField(source="owner.username", read_only=True) 
     event = serializers.CharField(source='event.title', read_only=True)
     class Meta:
         model = Ticket
@@ -38,7 +37,7 @@ class TicketListSerializer(serializers.ModelSerializer):
 class CraeteTicketSerializer(serializers.ModelSerializer):
     class Meta:
         model = Ticket
-        fields = ['owner', 'ticketdetails', 'event','price','available','image''delivery']
+        fields = ['owner', 'ticketdetails', 'event','price','available','image','delivery']
 
 class UpdateTicketSerializer(serializers.ModelSerializer):
     class Meta:

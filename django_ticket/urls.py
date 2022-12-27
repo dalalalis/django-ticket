@@ -17,7 +17,7 @@ from django.contrib import admin
 from django.urls import path, include
 
 from authentications.views import RegistrationAPIView, LoginAPIView
-from tickets.views import EventListView, EventCreateView, EventDeleteView, EventUpdateView,TicketListView,TicketCreateView,TicketUpdateView,TicketDeleteView,OrderListView,OrdertCreateView
+from tickets.views import EventListView, EventCreateView, EventDeleteView, EventUpdateView,TicketListView,TicketCreateView,TicketUpdateView,TicketDeleteView,OrderListView,OrdertCreateView,UserListedTickets
 from django.conf import settings
 from django.conf.urls.static import static 
 
@@ -41,7 +41,7 @@ urlpatterns = [
     path('tickets/add/', TicketCreateView.as_view() , name="ticket-add"),
     path('tickets/<int:ticket_id>/edit/', TicketUpdateView.as_view() , name="ticket-edit"),
     path('tickets/<int:ticket_id>/delete/', TicketDeleteView.as_view() , name="ticket-delete"),
-    
+    path('myticket/',UserListedTickets.as_view(), name="user ticket"), 
    # ----- Order URLs -----
     path('Orders/', OrderListView .as_view() , name="Orders-list"),
     path('Orders/add/', OrdertCreateView.as_view() , name="Orders-add"), 
