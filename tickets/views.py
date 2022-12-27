@@ -8,7 +8,7 @@ from tickets.serializers import TicketListSerializer , CraeteTicketSerializer , 
 from tickets.serializers import OrdersListSerializer , CraeteOrderSerializer 
 from rest_framework.permissions import IsAuthenticated, AllowAny, IsAdminUser
 
-from tickets.models import Event,Ticket,Orders
+from tickets.models import Event,Ticket,Orders,User
 
 
 
@@ -54,6 +54,15 @@ class TicketListView(ListAPIView):
         if param_event_id:
             return Ticket.objects.filter(available=True, event__id=int(param_event_id), event__startDate__gt=datetime.now())
         return Ticket.objects.filter(event__startDate__gt=datetime.now())
+    
+class UserListedTickets(ListAPIView):
+    serializer_class = TicketListSerializer
+    permission_classes=[IsAuthenticated]
+
+    def get_queryset(self):
+        user = self.request.user
+        return Ticket.objects.filter(owner=user)
+         
 
 
 class TicketCreateView(CreateAPIView):
