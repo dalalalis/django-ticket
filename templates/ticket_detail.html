@@ -1,0 +1,89 @@
+{% extends "_base.html" %} {% block content %}
+
+<div class="flex justify-center items-center">
+  <div
+    class="w-full max-w-sm bg-white rounded-lg shadow-md dark:bg-gray-800 dark:border-gray-700"
+  >
+    <a href="#">
+      <img
+        class="p-8 rounded-t-lg"
+        src="{{ticket.image.url}}"
+        alt="product image"
+      />
+    </a>
+    <div class="px-5 pb-5">
+      <a href="#">
+        <h5
+          class="text-xl font-semibold tracking-tight text-gray-900 dark:text-white"
+        >
+          {{ticket.ticketdetails}}
+        </h5>
+      </a>
+      <div class="flex flex-col mt-2.5 mb-5">
+        <h1>Owner: {{ticket.owner}}</h1>
+        <div class="flex mt-2">
+          <span
+            class="bg-blue-100 text-blue-800 text-xs font-semibold mr-2 px-2.5 py-0.5 rounded dark:bg-blue-200 dark:text-blue-800"
+            >{{ticket.event.title}}</span
+          >
+          <span
+            class="bg-blue-100 text-blue-800 text-xs font-semibold mr-2 px-2.5 py-0.5 rounded dark:bg-blue-200 dark:text-blue-800"
+            >{{ticket.event.venue}}</span
+          >
+        </div>
+      </div>
+      <div class="flex items-center justify-between">
+        <span class="text-3xl font-bold text-gray-900 dark:text-white"
+          >{{ticket.price}} KD</span
+        >
+
+        {% if ticket.available %}
+
+        {% if ticket_in_cart %}
+         {% if ticket.owner != user %}
+         <a
+          href={% url 'ticket_add_to_cart' ticket_id=ticket.id %}
+          class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+          >
+         Add to cart
+          
+          </a
+         {% else %}
+         <a
+
+          class="text-white cursor-not-allowed bg-green-700 hover:bg-green-800 focus:ring-4 focus:outline-none focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+          >
+         Owned by you
+          
+          </a
+         {% endif %}
+        {% else %}
+         <a
+         href={% url 'my_cart' %}
+          class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+          >
+         View cart
+          
+          </a
+        {% endif %}
+        
+
+        {% else %}
+
+
+         <a
+
+          class="text-white disabled cursor-not-allowed bg-gray-700  focus:ring-4 focus:outline-none focus:ring-gray-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+          >
+         Add to cart
+          
+          </a
+        {% endif %}
+       
+        >
+      </div>
+    </div>
+  </div>
+</div>
+
+{% endblock content %}

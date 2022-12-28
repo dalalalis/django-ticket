@@ -8,7 +8,7 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Django + Tailwind CSS + Flowbite</title>
+    <title>Wonder Tickets</title>
 
     {% compress css %}
     <link rel="stylesheet" href="{% static 'src/output.css' %}" />
@@ -27,12 +27,13 @@
       <div
         class="container flex flex-wrap items-center justify-between mx-auto"
       >
-        <a href="https://flowbite.com/" class="flex items-center">
-          <img
-            src="https://flowbite.com/docs/images/logo.svg"
-            class="h-6 mr-3 sm:h-9"
-            alt="Flowbite Logo"
-          />
+        <a href={% url 'index' %} class="flex items-center"
+        
+
+        >
+        {% load static %} <img src="{% static "/images/logo.png" %}" alt="LOGO" class="h-[25px]"/>
+        
+
           <span
             class="self-center text-xl font-semibold whitespace-nowrap dark:text-white"
             >WonderTickets</span
@@ -66,7 +67,7 @@
           >
             <li>
               <a
-                href="#"
+                href={% url 'index' %} 
                 class="block py-2 pl-3 pr-4 text-white bg-blue-700 rounded md:bg-transparent md:text-blue-700 md:p-0 dark:text-white"
                 aria-current="page"
                 >Home</a
@@ -74,11 +75,26 @@
             </li>
             <li>
               <a
-                href="#"
+                href={% url 'my_profile' %} 
                 class="block py-2 pl-3 pr-4 text-gray-700 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-gray-400 md:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent"
                 >Profile</a
               >
             </li>
+            <li>
+              <a
+                href={% url 'my_cart' %} 
+                class="block py-2 pl-3 pr-4 relative text-gray-700 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-gray-400 md:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent"
+                >
+                My Cart --
+                {% if cart != null %}
+                <div class="inline-flex absolute -top-2 -right-2 justify-center items-center w-6 h-6 text-xs font-bold text-white bg-red-500 rounded-full border-2 border-white dark:border-gray-900">{{cart_counter}}</div>
+                {% else %}
+                <div class="inline-flex absolute -top-2 -right-2 justify-center items-center w-6 h-6 text-xs font-bold text-white bg-red-500 rounded-full border-2 border-white dark:border-gray-900">0</div>
+                {% endif %}
+                </a
+              >
+            </li>
+
             {% comment %} TOGGLE LOGGIN LOGOUT {% endcomment %}
             <li>
               <a
